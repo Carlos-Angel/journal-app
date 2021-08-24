@@ -7,14 +7,12 @@ import { AuthRoutes } from './AuthRoutes';
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
-      <div className='auth__main'>
-        <div className='auth__box-container'>
-          <Switch>
-            <Route exact path='/' component={JournalScreen} />
-            <Route path='/auth' component={AuthRoutes} />
-            <Redirect to='/auth/login' />
-          </Switch>
-        </div>
+      <div>
+        <Switch>
+          <Route exact path='/' component={JournalScreen} />
+          <Route path='/auth' component={AuthRoutes} />
+          <Redirect to='/auth/login' />
+        </Switch>
       </div>
     </BrowserRouter>
   );
