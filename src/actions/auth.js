@@ -1,5 +1,5 @@
 import { getAuth, signInWithPopup } from 'firebase/auth';
-import { googleAuthProvider } from '../firebase';
+import { googleAuthProvider } from '../app';
 import { authTypes } from '../types';
 
 export const startLoginWithEmailAndPassword = (email, password) => {
