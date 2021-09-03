@@ -5,7 +5,7 @@ import { useForm } from '../../hooks/useForm';
 import {
   startLoginWithEmailAndPassword,
   startGoogleLogin,
-} from '../actions/auth';
+} from '../../actions/auth';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
