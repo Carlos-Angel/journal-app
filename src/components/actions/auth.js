@@ -1,3 +1,5 @@
+import { getAuth, signInWithPopup } from 'firebase/auth';
+import { googleAuthProvider } from '../../firebase';
 import { authTypes } from '../types';
 
 export const startLoginWithEmailAndPassword = (email, password) => {
@@ -8,11 +10,20 @@ export const startLoginWithEmailAndPassword = (email, password) => {
   };
 };
 
-export const login = (uuid, displayName) => {
+export const startGoogleLogin = () => {
+  return (dispatch) => {
+    const auth = getAuth();
+    signInWithPopup(auth, googleAuthProvider)
+      .then(({ user }) => dispatch(login(user.uid, user.displayName)))
+      .catch((error) => console.error(error.message));
+  };
+};
+
+export const login = (uid, displayName) => {
   return {
     type: authTypes.login,
     payload: {
-      uuid,
+      uid,
       displayName,
     },
   };
