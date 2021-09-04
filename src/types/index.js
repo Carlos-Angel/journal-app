@@ -3,4 +3,6 @@ export const authTypes = {
   logout: '[Auth] logout',
   uiSetError: '[UI] set Error',
   uiRemoveError: '[UI] remove Error',
+  uiStartLoading: '[UI] start loading',
+  uiFinishLoading: '[UI] finish loading',
 };

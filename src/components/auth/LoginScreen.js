@@ -11,7 +11,7 @@ import { setError, removeError } from 'actions/ui';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch();
-  const { msgError } = useSelector((state) => state.ui);
+  const { msgError, loading } = useSelector((state) => state.ui);
 
   const [{ email, password }, handleInputChange] = useForm({
     email: '',
@@ -66,7 +66,11 @@ export const LoginScreen = () => {
           value={password}
           onChange={handleInputChange}
         />
-        <button className='btn btn-primary btn-block' type='submit'>
+        <button
+          className='btn btn-primary btn-block'
+          type='submit'
+          disabled={loading}
+        >
           Login
         </button>
       </form>

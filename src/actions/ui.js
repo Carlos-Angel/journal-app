@@ -12,3 +12,15 @@ export const removeError = () => {
     type: authTypes.uiRemoveError,
   };
 };
+
+export const startLoading = () => {
+  return {
+    type: authTypes.uiStartLoading,
+  };
+};
+
+export const finishLoading = () => {
+  return {
+    type: authTypes.uiFinishLoading,
+  };
+};

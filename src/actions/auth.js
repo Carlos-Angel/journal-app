@@ -6,14 +6,17 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { googleAuthProvider } from 'app';
+import { startLoading, finishLoading, setError } from './ui';
 import { authTypes } from 'types';
 
 export const startLoginWithEmailAndPassword = (email, password) => {
   return (dispatch) => {
+    dispatch(startLoading());
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => dispatch(login(user.uid, user.displayName)))
-      .catch((error) => console.error(error.message));
+      .catch(() => dispatch(setError('email or password invalid')))
+      .finally(dispatch(finishLoading()));
   };
 };
 

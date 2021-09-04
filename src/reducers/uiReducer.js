@@ -16,7 +16,16 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         msgError: null,
       };
-
+    case authTypes.uiStartLoading:
+      return {
+        ...state,
+        loading: true,
+      };
+    case authTypes.uiFinishLoading:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
