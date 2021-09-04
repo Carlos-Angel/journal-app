@@ -1,19 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import validator from 'validator';
+import { useDispatch } from 'react-redux';
+import { removeError, setError } from 'actions/ui';
 import { useForm } from 'hooks/useForm';
 
 export const RegisterScreen = () => {
+  const dispatch = useDispatch();
   const initialValuesForm = {
     email: '',
     name: '',
     password: '',
     confirmPassword: '',
   };
-  const [valuesForm, handleInputChange] = useForm(initialValuesForm);
+  const [{ email, name, password, confirmPassword }, handleInputChange] =
+    useForm(initialValuesForm);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('values', valuesForm);
+    if (isFormValid()) {
+      dispatch(removeError());
+    }
+  };
+
+  const isFormValid = () => {
+    if (validator.isEmpty(name)) {
+      dispatch(setError('name is required'));
+      return false;
+    } else if (!validator.isEmail(email)) {
+      dispatch(setError('email is not valid'));
+      return false;
+    } else if (!validator.equals(password, confirmPassword)) {
+      dispatch(setError('password should be match each other'));
+      return false;
+    } else if (!validator.isLength(password, { min: 8 })) {
+      dispatch(setError('password should be at least 8 characters'));
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -26,7 +50,7 @@ export const RegisterScreen = () => {
           placeholder='Name'
           className='auth__input'
           autoComplete='off'
-          value={valuesForm.name}
+          value={name}
           onChange={handleInputChange}
         />
         <input
@@ -35,7 +59,7 @@ export const RegisterScreen = () => {
           placeholder='email'
           className='auth__input'
           autoComplete='off'
-          value={valuesForm.email}
+          value={email}
           onChange={handleInputChange}
         />
         <input
@@ -43,7 +67,7 @@ export const RegisterScreen = () => {
           name='password'
           placeholder='password'
           className='auth__input'
-          value={valuesForm.password}
+          value={password}
           onChange={handleInputChange}
         />
         <input
@@ -51,7 +75,7 @@ export const RegisterScreen = () => {
           name='confirmPassword'
           placeholder='Confirm password'
           className='auth__input'
-          value={valuesForm.confirmPassword}
+          value={confirmPassword}
           onChange={handleInputChange}
         />
         <button className='mb-5 btn btn-primary btn-block' type='submit'>
