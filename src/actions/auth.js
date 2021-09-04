@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import {
   getAuth,
   signInWithPopup,
@@ -7,7 +8,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { googleAuthProvider } from 'app';
-import { startLoading, finishLoading, setError } from './ui';
+import { startLoading, finishLoading } from './ui';
 import { authTypes } from 'types';
 
 export const startLoginWithEmailAndPassword = (email, password) => {
@@ -16,7 +17,7 @@ export const startLoginWithEmailAndPassword = (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => dispatch(login(user.uid, user.displayName)))
-      .catch(() => dispatch(setError('email or password invalid')))
+      .catch((message) => Swal.fire('Error', message, 'error'))
       .finally(dispatch(finishLoading()));
   };
 };
@@ -29,7 +30,7 @@ export const startRegister = ({ email, password, name }) => {
         await updateProfile(user, { displayName: name });
         dispatch(login(user.uid, user.displayName));
       })
-      .catch((error) => console.error(error.message));
+      .catch((message) => Swal.fire('Error', message, 'error'));
   };
 };
 
@@ -38,7 +39,7 @@ export const startGoogleLogin = () => {
     const auth = getAuth();
     signInWithPopup(auth, googleAuthProvider)
       .then(({ user }) => dispatch(login(user.uid, user.displayName)))
-      .catch((error) => console.error(error.message));
+      .catch((message) => Swal.fire('Error', message, 'error'));
   };
 };
 
