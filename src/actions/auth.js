@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut,
 } from 'firebase/auth';
 import { googleAuthProvider } from 'app';
 import { startLoading, finishLoading, setError } from './ui';
@@ -48,5 +49,19 @@ export const login = (uid, displayName) => {
       uid,
       displayName,
     },
+  };
+};
+
+export const startLogout = () => {
+  return async (dispatch) => {
+    const auth = getAuth();
+    await signOut(auth);
+    dispatch(logout());
+  };
+};
+
+export const logout = () => {
+  return {
+    type: authTypes.logout,
   };
 };
