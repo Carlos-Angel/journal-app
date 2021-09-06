@@ -6,3 +6,7 @@ export const authTypes = {
   uiStartLoading: '[UI] start loading',
   uiFinishLoading: '[UI] finish loading',
 };
+
+export const notesTypes = {
+  add: '[NOTE] add note',
+};
