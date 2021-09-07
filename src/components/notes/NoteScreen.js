@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { NotesAppBar } from './NotesAppBar';
+import { useForm } from 'hooks/useForm';
 
 export const NoteScreen = () => {
+  const { active: note } = useSelector((state) => state.notes);
+  const [{ body, title }, handleInputChange] = useForm(note);
   return (
     <div className='notes__main-content'>
       <NotesAppBar />
@@ -12,19 +16,20 @@ export const NoteScreen = () => {
           placeholder='Some awesome title'
           name='title'
           className='notes__title-input'
-          autocomplete='off'
+          autoComplete='off'
+          value={title}
+          onChange={handleInputChange}
         />
         <textarea
           name='description'
           className='notes__textarea'
           placeholder='what happened today'
+          value={body}
+          onChange={handleInputChange}
         ></textarea>
 
         <div className='notes__image'>
-          <img
-            src='https://enfocando.es/wp-content/2016/08/Panorama_7490.jpg'
-            alt='title-note'
-          />
+          {note?.url && <img src={note.url} alt='title-note' />}
         </div>
       </div>
     </div>
