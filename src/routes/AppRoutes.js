@@ -8,6 +8,8 @@ import { PublicRoute } from './PublicRoutes';
 
 import { AuthRoutes } from './AuthRoutes';
 import { login } from 'actions/auth';
+import { loadNotes } from 'helpers/loadNotes';
+import { setNotes } from 'actions/notes';
 
 export const AppRoutes = () => {
   const [checking, setChecking] = useState(true);
@@ -16,9 +18,11 @@ export const AppRoutes = () => {
 
   useEffect(() => {
     const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName));
+        const notes = await loadNotes(user.uid);
+        dispatch(setNotes(notes));
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);

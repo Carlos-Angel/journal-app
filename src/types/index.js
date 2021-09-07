@@ -9,10 +9,10 @@ export const authTypes = {
 
 export const notesTypes = {
   add: '[Notes] add note',
-  active: '[Notes] add note',
-  load: '[Notes] add note',
-  update: '[Notes] add note',
-  fileUrl: '[Notes] add note',
-  delete: '[Notes] add note',
-  logoutCleaning: '[Notes] add note',
+  active: '[Notes] active note',
+  load: '[Notes] load notes',
+  update: '[Notes] update note',
+  fileUrl: '[Notes] file url note',
+  delete: '[Notes] delete note',
+  logoutCleaning: '[Notes] logout and cleaning notes',
 };
