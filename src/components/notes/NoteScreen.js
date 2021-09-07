@@ -30,7 +30,7 @@ export const NoteScreen = () => {
           onChange={handleInputChange}
         />
         <textarea
-          name='description'
+          name='body'
           className='notes__textarea'
           placeholder='what happened today'
           value={body}
