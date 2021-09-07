@@ -1,6 +1,7 @@
 import { db } from 'app';
 import { notesTypes } from 'types';
 import { addDoc, collection } from 'firebase/firestore';
+import { loadNotes } from 'helpers/loadNotes';
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -24,6 +25,13 @@ export const activeNote = (id, note) => ({
     ...note,
   },
 });
+
+export const startLoadingNotes = (uid) => {
+  return async (dispatch) => {
+    const notes = await loadNotes(uid);
+    dispatch(setNotes(notes));
+  };
+};
 
 export const setNotes = (notes) => ({
   type: notesTypes.load,
