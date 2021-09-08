@@ -23,6 +23,8 @@ npm start
 
 ## tests
 
+- copiar el archivo `.env.example` a `.env.test.local`
+- agregar las variables de entorno definidas en el archivo
 - ejecutar pruebas
 
 ```bash
