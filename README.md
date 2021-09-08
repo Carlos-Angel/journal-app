@@ -20,3 +20,11 @@ aplicación web para guardar notas en un diario personal, creado con react y sas
 ```bash
 npm start
 ```
+
+## tests
+
+- ejecutar pruebas
+
+```bash
+npm run test
+```
