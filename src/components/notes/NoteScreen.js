@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotesAppBar } from './NotesAppBar';
 import { useForm } from 'hooks/useForm';
-import { activeNote } from 'actions/notes';
+import { activeNote, startDeleting } from 'actions/notes';
 
 export const NoteScreen = () => {
   const { active: note } = useSelector((state) => state.notes);
@@ -21,6 +21,10 @@ export const NoteScreen = () => {
     dispatch(activeNote(note.id, { ...note, title, body }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [body, title]);
+
+  const handleDelete = () => {
+    dispatch(startDeleting(note.id));
+  };
 
   return (
     <div className='notes__main-content'>
@@ -48,6 +52,9 @@ export const NoteScreen = () => {
           {note?.url && <img src={note.url} alt='title-note' />}
         </div>
       </div>
+      <button className='btn btn-danger' onClick={handleDelete}>
+        Delete
+      </button>
     </div>
   );
 };

@@ -27,6 +27,13 @@ export const notesReducer = (state = initialState, action) => {
           note.id === action.payload.id ? action.payload : note,
         ),
       };
+
+    case notesTypes.delete:
+      return {
+        ...state,
+        active: null,
+        notes: state.notes.filter((note) => note.id !== action.payload),
+      };
     default:
       return state;
   }
