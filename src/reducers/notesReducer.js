@@ -20,6 +20,13 @@ export const notesReducer = (state = initialState, action) => {
         notes: [...action.payload],
       };
 
+    case notesTypes.update:
+      return {
+        ...state,
+        notes: state.notes.map((note) =>
+          note.id === action.payload.id ? action.payload : note,
+        ),
+      };
     default:
       return state;
   }
