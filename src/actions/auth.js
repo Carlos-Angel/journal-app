@@ -10,6 +10,7 @@ import {
 import { googleAuthProvider } from 'app';
 import { startLoading, finishLoading } from './ui';
 import { authTypes } from 'types';
+import { deleteNotes } from './notes';
 
 export const startLoginWithEmailAndPassword = (email, password) => {
   return (dispatch) => {
@@ -58,6 +59,7 @@ export const startLogout = () => {
     const auth = getAuth();
     await signOut(auth);
     dispatch(logout());
+    dispatch(deleteNotes());
   };
 };
 

@@ -111,3 +111,7 @@ export const deleteNote = (id) => ({
   type: notesTypes.delete,
   payload: id,
 });
+
+export const deleteNotes = () => ({
+  type: notesTypes.logoutCleaning,
+});
