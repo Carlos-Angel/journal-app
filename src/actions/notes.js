@@ -21,9 +21,16 @@ export const startNewNote = () => {
       date: new Date().getTime(),
     };
 
-    const document = await addDoc(collection(db, `${uid}/journal/notes`), note);
-    dispatch(activeNote(document.id, note));
-    dispatch(addNote(document.id, note));
+    try {
+      const document = await addDoc(
+        collection(db, `${uid}/journal/notes`),
+        note,
+      );
+      dispatch(activeNote(document.id, note));
+      dispatch(addNote(document.id, note));
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 };
 

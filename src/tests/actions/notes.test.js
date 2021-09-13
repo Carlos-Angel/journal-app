@@ -3,8 +3,19 @@ import { deleteDoc, disableNetwork, doc, getDoc } from '@firebase/firestore';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { db } from 'app';
-import { startNewNote, startLoadingNotes, startSaveNote } from 'actions/notes';
+import {
+  startNewNote,
+  startLoadingNotes,
+  startSaveNote,
+  startUploading,
+} from 'actions/notes';
 import { notesTypes } from 'types';
+
+jest.mock('helpers/fileUpload', () => ({
+  fileUpload: jest.fn(() => {
+    return Promise.resolve('https://test.com/imagen.jpg');
+  }),
+}));
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -12,6 +23,13 @@ const mockStore = configureStore(middlewares);
 const initState = {
   auth: {
     uid: 'TESTING-UID',
+  },
+  notes: {
+    active: {
+      id: 'Kj6fh3vgDwetsNJuho9y',
+      title: 'tes note',
+      body: 'test description note',
+    },
   },
 };
 
@@ -93,5 +111,16 @@ describe('Pruebas con las acciones notes', () => {
     );
 
     expect(note.title).toBe(docRef.data().title);
+  });
+
+  test('debe de actualizar el url del entry - startUploading', async () => {
+    const file = [];
+    await store.dispatch(startUploading(file));
+
+    const docRef = await getDoc(
+      doc(db, '/TESTING-UID/journal/notes/Kj6fh3vgDwetsNJuho9y'),
+    );
+
+    expect(docRef.data().url).toBe('https://test.com/imagen.jpg');
   });
 });
