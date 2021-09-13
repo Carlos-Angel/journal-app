@@ -16,7 +16,7 @@ export const startLoginWithEmailAndPassword = (email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => dispatch(login(user.uid, user.displayName)))
       .catch((message) => Swal.fire('Error', message, 'error'))
       .finally(dispatch(finishLoading()));
