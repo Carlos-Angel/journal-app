@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
-import { startGoogleSingIn } from '../../store/auth/slices';
+import { startGoogleSingIn, startLoginWithEmailAndPassword } from '../../store/auth/slices';
 
 export const LoginPage = () => {
   const { formState, onInputChange } = useForm({ email: 'test@test.com', password: 'password' });
@@ -18,7 +18,7 @@ export const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    dispatch(startLoginWithEmailAndPassword(email, password));
   };
 
   const onGoogleSignIn = () => {
