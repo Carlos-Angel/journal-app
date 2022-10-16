@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from '../../../firebase/providers';
-import { checkingCredentials, login, logout } from './auth.slice';
+import { checkingCredentials, login, logout } from '../auth.slice';
 
 const startLoginWithEmailAndPassword = (email, password) => {
   return async (dispatch) => {

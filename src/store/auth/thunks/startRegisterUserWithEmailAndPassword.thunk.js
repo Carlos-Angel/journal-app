@@ -1,5 +1,5 @@
 import { registerUserWithEmailAndPassword } from '../../../firebase/providers';
-import { checkingCredentials, login, logout } from './auth.slice';
+import { checkingCredentials, login, logout } from '../auth.slice';
 
 const startRegisterUserWithEmailAndPassword = ({ email, password, displayName }) => {
   return async (dispatch) => {

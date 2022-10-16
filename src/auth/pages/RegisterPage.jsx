@@ -2,7 +2,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useDispatch, useSelector } from 'react-redux';
-import { emptyError, startRegisterUserWithEmailAndPassword } from '../../store/auth/slices';
+import { startRegisterUserWithEmailAndPassword } from '../../store/auth/thunks';
+import { emptyError } from '../../store/auth';
 import { useForm } from '../../hooks';
 import { useMemo } from 'react';
 

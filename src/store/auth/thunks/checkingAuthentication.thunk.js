@@ -1,4 +1,4 @@
-import { checkingCredentials } from './auth.slice';
+import { checkingCredentials } from '../auth.slice';
 
 const checkingAuthentication = (email, password) => {
   return async (dispatch) => {

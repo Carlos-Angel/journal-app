@@ -1,5 +1,5 @@
 import { sigInWithGoogle } from '../../../firebase/providers';
-import { checkingCredentials, logout, login } from './auth.slice';
+import { checkingCredentials, logout, login } from '../auth.slice';
 
 const startGoogleSingIn = () => {
   return async (dispatch) => {
