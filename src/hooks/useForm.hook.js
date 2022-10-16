@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useForm(initialForm = {}) {
   const [formState, setFormState] = useState(initialForm);
@@ -10,6 +10,10 @@ export default function useForm(initialForm = {}) {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    setFormState(initialForm);
+  }, [initialForm]);
 
   const onResetForm = () => {
     setFormState(initialForm);
