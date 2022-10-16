@@ -80,3 +80,18 @@ export async function registerUserWithEmailAndPassword({ email, password, displa
     };
   }
 }
+
+export async function logoutFirebase() {
+  try {
+    await firebaseAuth.signOut();
+    return { ok: true };
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    return {
+      ok: false,
+      errorCode,
+      errorMessage,
+    };
+  }
+}
