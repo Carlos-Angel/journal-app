@@ -9,8 +9,10 @@ import { useForm } from '../../hooks';
 import { startGoogleSingIn, startLoginWithEmailAndPassword } from '../../store/auth/thunks';
 import { emptyError } from '../../store/auth';
 
+const initialStateForm = { email: '', password: '' };
+
 export const LoginPage = () => {
-  const { formState, onInputChange } = useForm({ email: 'test@test.com', password: 'password' });
+  const { formState, onInputChange } = useForm(initialStateForm);
   const { email, password } = formState;
   const { status, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();

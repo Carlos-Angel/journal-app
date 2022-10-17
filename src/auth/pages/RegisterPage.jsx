@@ -7,8 +7,10 @@ import { emptyError } from '../../store/auth';
 import { useForm } from '../../hooks';
 import { useMemo } from 'react';
 
+const initialStateForm = { email: '', password: '', displayName: '' };
+
 export const RegisterPage = () => {
-  const { formState, onInputChange } = useForm({ email: '', password: '', displayName: '' });
+  const { formState, onInputChange } = useForm(initialStateForm);
   const { email, password, displayName } = formState;
 
   const { status, errorMessage } = useSelector((state) => state.auth);
