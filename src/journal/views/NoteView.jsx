@@ -1,18 +1,19 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SaveOutlined } from '@mui/icons-material';
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { SaveOutlined, UploadOutlined } from '@mui/icons-material';
+import { Button, Grid, TextField, Typography, IconButton } from '@mui/material';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 
 import { useForm } from '../../hooks';
 import { ImageGallery } from '../components';
 import { setActiveNote } from '../../store/journal/journal.slice';
-import { startSaveNote } from '../../store/journal/thunks';
+import { startSaveNote, startUploadingFiles } from '../../store/journal/thunks';
 
 export const NoteView = () => {
   const { note, messageSaved, isSaving } = useSelector((state) => state.journal);
   const dispatch = useDispatch();
+  const fileInputRef = useRef();
 
   const { body, title, date, onInputChange, formState } = useForm(note);
 
@@ -36,6 +37,13 @@ export const NoteView = () => {
     dispatch(startSaveNote());
   };
 
+  const onFileInputChange = (e) => {
+    const { target } = e;
+    if (target.files === 0) return;
+
+    dispatch(startUploadingFiles(target.files));
+  };
+
   return (
     <Grid
       className='animate__animated animate__fadeIn animate__faster'
@@ -51,6 +59,22 @@ export const NoteView = () => {
         </Typography>
       </Grid>
       <Grid item>
+        <input
+          ref={fileInputRef}
+          type='file'
+          multiple
+          onChange={onFileInputChange}
+          style={{ display: 'none' }}
+        />
+
+        <IconButton
+          color='primary'
+          disabled={isSaving}
+          onClick={() => fileInputRef.current.click()}
+        >
+          <UploadOutlined />
+        </IconButton>
+
         <Button color='primary' sx={{ padding: 2 }} onClick={onSaveNote} disabled={isSaving}>
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Guardar
