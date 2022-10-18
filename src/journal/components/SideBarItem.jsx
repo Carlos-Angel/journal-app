@@ -14,7 +14,7 @@ export default function SideBarItem({ id, body, title, date, imageUrls = [] }) {
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>
-        <Grid container>
+        <Grid container flexDirection='column'>
           <ListItemText
             primary={title}
             primaryTypographyProps={{
