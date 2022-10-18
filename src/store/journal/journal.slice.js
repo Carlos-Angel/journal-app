@@ -50,6 +50,13 @@ export const journalSlice = createSlice({
       state.note.imageUrls = [...state.note?.imageUrls, ...action.payload];
       state.isSaving = false;
     },
+    clearNotesLogout: (state) => {
+      state.isSaving = false;
+      state.messageSaved = '';
+      state.notes = [];
+      state.note = null;
+    },
+
     deleteNoteByID: (state, action) => {},
   },
 });
@@ -62,4 +69,5 @@ export const {
   updateNote,
   deleteNoteByID,
   setPhotosToActiveNote,
+  clearNotesLogout,
 } = journalSlice.actions;
