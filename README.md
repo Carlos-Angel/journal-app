@@ -1,32 +1,39 @@
 # Journal App
 
-aplicación web para guardar notas en un diario personal, creado con react y sass
+Aplicación web para guardar notas en un diario personal
 
-## setting
+# tecnologías
 
-- copiar el archivo `.env.example` a `.env.local`
-- agregar las variables de entorno definidas en el archivo
+- react
+- vite
+- firebase
+- cloudinary
+
+## settings
+
+```bash
+# copiar el archivo .env e iniciar las variables de entorno
+cp .env.dist .env
+```
 
 ## getting started
 
-- instalar dependencias
-
 ```bash
-  npm install
+# instalar las dependencias
+yarn install
 ```
 
-- iniciar proyecto
-
 ```bash
-npm start
+#iniciar el modo desarrollo
+yarn dev
 ```
 
 ## tests
 
-- copiar el archivo `.env.example` a `.env.test.local`
-- agregar las variables de entorno definidas en el archivo
-- ejecutar pruebas
-
 ```bash
-npm run test
+# copiar el archivo .env e iniciar las variables de entorno para pruebas
+cp .env .env.test
+
+#ejecutar las pruebas
+yarn test
 ```
