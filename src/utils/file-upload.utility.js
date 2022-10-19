@@ -3,10 +3,10 @@ import { getEnvironments } from './get-environments.utility';
 export const fileUpload = async (file) => {
   if (!file) throw new Error('No tenemos ningún archivo a subir');
 
-  const { VITE_CLOUDINARY_URL, VITE_UPLOAD_PRESET } = getEnvironments();
+  const { VITE_CLOUDINARY_URL, VITE_CLOUDINARY_UPLOAD_PRESET } = getEnvironments();
 
   const cloudUrl = VITE_CLOUDINARY_URL;
-  const uploadPreset = VITE_UPLOAD_PRESET;
+  const uploadPreset = VITE_CLOUDINARY_UPLOAD_PRESET;
 
   const formData = new FormData();
   formData.append('upload_preset', uploadPreset);
