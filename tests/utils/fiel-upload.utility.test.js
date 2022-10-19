@@ -29,4 +29,14 @@ describe('prueba en fileUpload', () => {
       resource_type: 'image',
     });
   });
+
+  test('debe fallar fileUpload si no se envía una imagen', async () => {
+    try {
+      const file = new File([], 'foto.jpg');
+      await fileUpload(file);
+      expect(true).toBe(false);
+    } catch (error) {
+      expect(typeof error.message).toBe('string');
+    }
+  });
 });
