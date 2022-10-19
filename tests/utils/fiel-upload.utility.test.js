@@ -1,4 +1,12 @@
+import { v2 as cloudinary } from 'cloudinary';
 import { fileUpload } from '../../src/utils/file-upload.utility';
+
+cloudinary.config({
+  cloud_name: process.env.VITE_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.VITE_CLOUDINARY_API_KEY,
+  api_secret: process.env.VITE_CLOUDINARY_API_SECRET,
+  secure: true,
+});
 
 describe('prueba en fileUpload', () => {
   test('debe de subir el archivo correctamente a cloudinary', async () => {
@@ -12,5 +20,13 @@ describe('prueba en fileUpload', () => {
     const url = await fileUpload(file);
 
     expect(typeof url).toBe('string');
+
+    const segments = url.split('/');
+
+    const imageId = segments[segments.length - 1].replace('.jpg', '');
+
+    await cloudinary.api.delete_resources([`react-journal/${imageId}`], {
+      resource_type: 'image',
+    });
   });
 });
