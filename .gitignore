@@ -30,3 +30,4 @@ yarn.lock
 
 # environments
 .env
+.env.test
